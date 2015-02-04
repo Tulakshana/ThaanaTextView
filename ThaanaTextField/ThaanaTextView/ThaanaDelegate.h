@@ -10,14 +10,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface ThaanaDelegate : NSObject <UITextViewDelegate> {
-
-    NSMutableArray* _lines;
-}
-
+@interface ThaanaDelegate : NSObject <UITextViewDelegate> 
 //factory method that returns a thaanaDelegate Object. 
 +(ThaanaDelegate *) thaanaDelegate;
-//main logic
-+(NSString*) reverseText:(NSString*) text withFont:(UIFont*) font carretPosition:(NSRange*) cpos Lines:(NSMutableArray*) lines Bounds:(CGRect) bounds;
+
 
 @end
