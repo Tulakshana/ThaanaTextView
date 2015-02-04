@@ -14,5 +14,4 @@
 #TODO
 
 * change to unicode
-* dates (e.g. 2015-02-04)
-* mathematical equations (e.g. 5+5=10)
+
