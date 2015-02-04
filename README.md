@@ -14,4 +14,4 @@
 #TODO
 
 * change to unicode
-* dates and numbers.
+* dates (e.g. 2015-02-04)
