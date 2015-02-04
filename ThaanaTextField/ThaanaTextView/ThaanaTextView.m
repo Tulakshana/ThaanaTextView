@@ -20,7 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.textAlignment = UITextAlignmentRight;
+        self.textAlignment = NSTextAlignmentRight;
         self.font = [UIFont fontWithName:FONT_USED size:FONT_SIZE];
         self.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -38,7 +38,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super initWithCoder:decoder]) {
         
-        self.textAlignment = UITextAlignmentRight;
+        self.textAlignment = NSTextAlignmentRight;
         self.font = [UIFont fontWithName:FONT_USED size:FONT_SIZE];
         self.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.autocorrectionType = UITextAutocorrectionTypeNo;

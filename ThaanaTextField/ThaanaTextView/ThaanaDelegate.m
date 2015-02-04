@@ -52,8 +52,29 @@
     cpos->location = 0;
     if( [text length] ) {
         if( ![text isEqualToString: @"\n"] ) {
+            int insertIndex = 0;
+            NSRange searchRange = [text rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
+            /*decimalDigitCharacterSet : this set is the set of all characters used to represent the decimal values 0 through 9. These characters include, for example, the decimal digits of the Indic scripts and Arabic. Looks like the the decimal character of faseyha is not recognised. - Tula
+             
+             */
+            if ((searchRange.location != NSNotFound) || [text isEqualToString:@"."]) {
+                NSMutableString *lastLine = (NSMutableString*)[lines lastObject];
+                for (int i = 0; i < [lastLine length]; i++) {
+                    NSString *character = [[lastLine substringToIndex:i+1] substringFromIndex:i];
+                    searchRange = [character rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
+                    
+                    
+                    if ((searchRange.location != NSNotFound) || [character isEqualToString:@"."]) {
+                        insertIndex++;
+                    }else {
+                        break;
+                        
+                    }
+                }
+                
+            }
             [(NSMutableString*)[lines lastObject] insertString: text
-                                                       atIndex: 0];
+                                                       atIndex: insertIndex];
         } else {
             [lines addObject: [NSMutableString stringWithCapacity: 255]];
         }
