@@ -104,18 +104,14 @@
 
 - (void)insertText:(NSString *)text{
     int insertIndex = 0;
-    NSRange searchRange = [text rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
-    /*decimalDigitCharacterSet : this set is the set of all characters used to represent the decimal values 0 through 9. These characters include, for example, the decimal digits of the Indic scripts and Arabic. Looks like the the decimal character of faseyha is not recognised. - Tula
-     
-     */
-    if ((searchRange.location != NSNotFound) || [text isEqualToString:@"."]) {
+
+    if ([self isDecimal:text]||[self isOperator:text]) {
         NSMutableString *lastLine = (NSMutableString*)[self.lines lastObject];
         for (int i = 0; i < [lastLine length]; i++) {
             NSString *character = [[lastLine substringToIndex:i+1] substringFromIndex:i];
-            searchRange = [character rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
+        
             
-            
-            if ((searchRange.location != NSNotFound) || [character isEqualToString:@"."]) {
+            if ([self isDecimal:character]||[self isOperator:character]) {
                 insertIndex++;
             }else {
                 break;
@@ -126,6 +122,20 @@
     }
     [(NSMutableString*)[self.lines lastObject] insertString: text
                                                atIndex: insertIndex];
+}
+
+- (BOOL)isDecimal:(NSString *)text{
+    NSRange searchRange = [text rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
+    /*decimalDigitCharacterSet : this set is the set of all characters used to represent the decimal values 0 through 9. These characters include, for example, the decimal digits of the Indic scripts and Arabic. Looks like the the decimal character of faseyha is not recognised. - Tula
+     
+     */
+    return ((searchRange.location != NSNotFound) || [text isEqualToString:@"."]);
+}
+
+- (BOOL)isOperator:(NSString *)text{
+    NSRange searchRange = [text rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"+-*/^%!()[]{}="]];
+
+    return (searchRange.location != NSNotFound);
 }
 
 @end
